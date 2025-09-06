@@ -1,0 +1,19 @@
+{
+    "mexico": {
+        "pais": "MEXICO",
+        "stats":{
+            "partidos": 60,
+            "victorias": 17,
+            "derrotas": 28,
+            "empates": 15,
+            "goles": 62
+        },
+        "trivia": [
+            { 
+                "pregunta": "¿En qué año organizó México su primer Mundial?",
+                "opciones": ["1971", "1970", "1986"],
+                "respuesta": "1970"
+            }
+        ]
+    }
+}

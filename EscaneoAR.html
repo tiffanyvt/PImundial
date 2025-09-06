@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -45,7 +45,19 @@
                     </a>
                 </div>
 
-                <!-- BOTONES -->
+                <!-- PANEL ESTADÍSTICAS -->
+                <div class="panel" id="panelStats" style="display:none;">
+                <h3>Estadísticas</h3>
+                <ul id="statsContent"></ul>
+                </div>
+
+                <!-- PANEL TRIVIA -->
+                <div class="panel" id="panelTrivia" style="display:none;">
+                <h3>Trivia</h3>
+                <div id="triviaContent"></div>
+                </div>
+
+                <!-- BOTONES PRINCIPALES -->
                 <div class="overlay-menu" id="overlay-menu" aria-label="Controles" style="display: none;">
                     <button class="ui" id="btnVideo">1. Ver video</button>
                     <button class="ui" id="btnStats">2. Estadísticas</button>
@@ -64,7 +76,7 @@
 
                     <a-assets>
                         <!-- Modelos -->
-                        <a-asset-item id="modeloTrofeo" src="./modelos/trofeo/trofeoo.gltf"></a-asset-item>
+                        <a-asset-item id="modeloTrofeo" src="./modelos/mexico_flag/mexico_flag.gltf"></a-asset-item>
 
                         <!-- Videos -->
                         <video id="videoMX" src="./assets/videoMX.mp4" loop crossorigin="anonymous" webkit-playsinline playsinline muted></video>
@@ -76,14 +88,24 @@
 
                     <!--== TARGET: México (1) ==-->
                     <a-entity mindar-image-target="targetIndex: 0" id="targetMX">
-                        <a-gltf-model id="gltfMX" src="#modeloTrofeo"
-                        position="0 -0.20 0.1" scale="0.8 0.8 0.8" visible="false">
+                        <a-gltf-model 
+                            id="gltfMX" src="#modeloTrofeo"
+                            position="0 -0.20 0.1" scale="0.0002 0.0002 0.0002" visible="false"
+                            animation-mixer="clip: *; loop: repeat">
                         </a-gltf-model>
 
                         <a-video id="videoMexico" src="#videoMX" 
-                        width="0.5" height="1" position="0 0 0" visible="false"></a-video>
-                    </a-entity>
+                        width="0.4" height="0.7" position="0 0 0" visible="false"></a-video>
 
+                        <a-entity id="statsGroup" visible="false">
+                            <a-plane id="statsBG" position="0 0 0" 
+                                     width="0.3" height="0.5" 
+                                     color="#0f1a3a" opacity="0.7"
+                                     material="shader: standard; side: double; rounded:true;">
+                            </a-plane>
+                            <a-text id="statsText" value=""></a-text>
+                        </a-entity>
+                    </a-entity>
                 </a-scene>
             </section>
         </main>
@@ -131,7 +153,8 @@
             console.log("No se detecta México");
             currentTarget = null;
             overlayMenu.style.display = "none";
-            gltfMexico.setAttribute("visible", "false");
+
+            ocultarTodo();
 
             // Video
             const videoCont = document.getElementById("videoMX");
@@ -150,41 +173,162 @@
         btnModelo.addEventListener("click", () => {
             console.log("Clic en botón modelo 3D, target:", currentTarget);
             if (!currentTarget) return;
+            ocultarTodo();
+            const model = document.getElementById("gltfMX");
+            const videoAR = document.getElementById("videoMexico");
+            const videoEl = document.getElementById("videoMX");
+            if (model) model.setAttribute("visible", "true");
+            if (videoAR) videoAR.setAttribute("visible", "false");
+            if (videoEl) { videoEl.pause(); 
+                videoEl.muted = true;
+            }
+            const vc = document.getElementById("videoControls");
+            if (vc) vc.style.display = "none";
+
             if( currentTarget === "mexico") {
                 gltfMexico.setAttribute("visible","true");
                 gltfMexico.setAttribute("animation", "property: rotation; to: 0 360 0; loop:true; dur:10000");
             }
         });
 
-        // Botón Ver Video
+       // Botón Ver Video
         btnVideo.addEventListener("click", () => {
             if(!currentTarget) return;
+            ocultarTodo();
 
-        let videoCont = null;
-        let videoAR = null;
+            let videoCont = null;
+            let videoAR = null;
+            let model = null;
 
-        if (currentTarget === "mexico") {
-            videoCont = document.getElementById("videoMX"); //<video>
-            videoAR = document.getElementById("videoMexico"); //<a-video>
-        }
+            if (currentTarget === "mexico") {
+                videoCont = document.getElementById("videoMX"); //<video>
+                videoAR = document.getElementById("videoMexico"); //<a-video>
+                model = document.getElementById("gltfMX"); 
+            }
 
-        if (videoCont && videoAR) {
-            videoAR.setAttribute("visible", "true");
+            if (videoCont && videoAR) {
+                if (model) {
+                    model.setAttribute("visible", "false");
+                    model.removeAttribute("animation"); 
+                }
 
-            videoCont.muted = false;
-            videoCont.playsInline = true;
+                videoAR.setAttribute("visible", "true");
+                videoCont.muted = false;
+                videoCont.playsInline = true;
 
-            videoCont.pause();
-            videoCont.currentTime = 0;
+                videoCont.pause();
+                videoCont.currentTime = 0;
 
-            videoCont.oncanplay = () => {
-                videoCont.play().catch(err => console.log("Hubo un error al reproducir el video:", err));
-                videoCont.oncanplay = null;
-            };
+                videoCont.oncanplay = () => {
+                    videoCont.play().catch(err => console.log("Hubo un error al reproducir el video:", err));
+                    videoCont.oncanplay = null;
+                };
 
-            videoAR.setAttribute("src", "#" + videoCont.id);
-        }
+                videoAR.setAttribute("src", "#" + videoCont.id);
+            }
         });
-    </script>
+
+        // Paneles
+        const panelStats = document.getElementById("panelStats");
+        const statsContent = document.getElementById("statsContent");
+        const statsGroup = document.getElementById("statsGroup");
+
+        const panelTrivia = document.getElementById("panelTrivia");
+        const triviaContent = document.getElementById("triviaContent");
+
+        // Botón Estadísticas
+        function mostrarStatsAR(pais) {
+            const statsText = document.getElementById("statsText");
+            if (pais && pais.stats) {
+                statsText.setAttribute("value", 
+                    `${pais.pais}\n` + 
+                    `Partidos: ${pais.stats.partidos}\n` +
+                    `Victorias: ${pais.stats.victorias}\n` +
+                    `Derrotas: ${pais.stats.derrotas}\n` +
+                    `Empates: ${pais.stats.empates}\n` +
+                    `Goles: ${pais.stats.goles}`
+                );
+                statsText.setAttribute("color", "#FFD700");
+                statsText.setAttribute("width", 1);
+                statsText.setAttribute("align", "center");
+                statsText.setAttribute("position", "0 0 0.02");
+                statsText.setAttribute("font", "https://cdn.aframe.io/fonts/Roboto-msdf.json"); 
+                statsGroup.setAttribute("visible", "true");
+                statsText.setAttribute("wrap-count", 40);
+            }
+        }
+
+        btnStats.addEventListener("click", () => {
+            if (!currentTarget) return;
+            ocultarTodo(); 
+
+           const pais = DATA[currentTarget];
+           mostrarStatsAR(pais);
+        });
+
+        // Botón Trivia
+        btnTrivia.addEventListener("click", () => {
+            if (!currentTarget) return;
+            ocultarTodo(); 
+
+            const pais = DATA[currentTarget];
+            if (pais && pais.trivia) {
+                triviaContent.innerHTML = "";
+                pais.trivia.forEach((q, idx) => {                
+                const div = document.createElement("div");
+                div.classList.add("trivia-question");
+                div.innerHTML = `
+                    <p><b>${q.pregunta}</b></p>
+                    <div class="options">
+                    ${q.opciones.map(opt => `<button class="trivia-opt">${opt}</button>`).join(" ")}
+                    </div>
+                    <div class="feedback"></div>
+                    <hr>
+                `;
+                triviaContent.appendChild(div);
+
+                 // Respuestas
+                div.querySelectorAll(".trivia-opt").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const feedback = div.querySelector(".feedback");
+                    if (btn.textContent === q.respuesta) {
+                        feedback.textContent = "Correcto 💯";
+                        feedback.style.color = "#3ef11e";
+                    } else {
+                        feedback.textContent = `Incorrecto. La respuesta es: ${q.respuesta}`;
+                        feedback.style.color = "#d00000";
+                    }
+                    });
+                });
+                });
+            } else {
+                triviaContent.innerHTML = "<p>No hay pregunta disponible</p>";
+            }
+
+            panelTrivia.style.display = "block";
+        });
+
+        function ocultarTodo() {
+            // MODELO
+            gltfMexico.setAttribute("visible", "false");
+            gltfMexico.removeAttribute("animation");
+
+            // VIDEO
+            const videoCont = document.getElementById("videoMX");
+            const videoAR = document.getElementById("videoMexico");
+            if (videoCont) {
+                videoCont.pause();
+                videoCont.muted = true;
+            }
+            if (videoAR) videoAR.setAttribute("visible", "false");
+
+            // ESTADISTICAS  
+            statsGroup.setAttribute("visible", "false");
+
+            panelStats.style.display = "none";
+            panelTrivia.style.display = "none";
+        }
+
+        </script>
 </body>
 </html>
