@@ -1,0 +1,11 @@
+Model Information:
+* title:	WORLD_CUP_V1
+* source:	https://sketchfab.com/3d-models/world-cup-v1-eb3e3ca22266439594ce2ebad33d3020
+* author:	downlowfilms (https://sketchfab.com/downlowfilms)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "WORLD_CUP_V1" (https://sketchfab.com/3d-models/world-cup-v1-eb3e3ca22266439594ce2ebad33d3020) by downlowfilms (https://sketchfab.com/downlowfilms) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
