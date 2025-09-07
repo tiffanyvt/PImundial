@@ -191,3 +191,49 @@ button.ui:active{
     font-weight: bold;
     font-size: 14px;
 }
+
+/*HISTOGRAMA*/
+.hist-panel {
+  position: fixed;
+  right: 12px;
+  top: 120px;
+  width: 280px;
+  background: rgba(10,12,20,0.78);
+  color: #fff;
+  border-radius: 10px;
+  padding: 8px;
+  z-index: 9999;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+}
+
+.hist-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:6px;
+}
+
+.hist-header h4 {
+  margin:0;
+  font-size:13px;
+  font-weight:600;
+}
+
+#histToggle {
+  background:transparent;
+  border:none;
+  color:#fff;
+  cursor:pointer;
+  font-size:14px;
+  padding:4px;
+}
+
+.hist-panel.minimized {
+  height: 30px;          
+  overflow: hidden;       
+  transition: height 0.3s ease;
+}
+
+.hist-panel.minimized canvas {
+  display: none;        
+}

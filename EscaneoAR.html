@@ -57,6 +57,15 @@
                 <div id="triviaContent"></div>
                 </div>
 
+                <!-- HISTOGRAMA -->
+                <aside id="histPanel" class="hist-panel">
+                <div class="hist-header">
+                    <h4>Histograma RGB</h4>
+                    <button id="histToggle" aria-pressed="false">▤</button>
+                </div>
+                <canvas id="histCanvas" width="256" height="100"></canvas>
+                </aside>
+
                 <!-- BOTONES PRINCIPALES -->
                 <div class="overlay-menu" id="overlay-menu" aria-label="Controles" style="display: none;">
                     <button class="ui" id="btnVideo">1. Ver video</button>
@@ -329,6 +338,102 @@
             panelTrivia.style.display = "none";
         }
 
+        /*// HISTOGRAMA
+        (function(){
+            const histPanel = document.getElementById('histPanel');
+            const histToggle = document.getElementById('histToggle');
+            const canvas = document.getElementById('histCanvas');
+            const ctx = canvas.getContext('2d');
+            const tmpCanvas = document.createElement('canvas');
+            const tmpCtx = tmpCanvas.getContext('2d');
+
+            let rafId = null;
+
+            function getSourceVideo() {
+                const vids = Array.from(document.querySelectorAll('video'));
+                const preferMX = vids.find(v=> v.id === 'videoMX' && !v.paused && v.readyState >= 2);
+                if (preferMX) return preferMX;
+                return vids.find(v => !v.paused && v.readyState >= 2) || null;
+            }
+
+            function sampleFrame(){
+                const src = getSourceVideo();
+                if (!src) { rafId = requestAnimationFrame(sampleFrame); return; }
+
+                const w = 160, h = 90;
+                tmpCanvas.width = w; tmpCanvas.height = h;
+                tmpCtx.drawImage(src,0,0,w,h);
+                let data;
+                try {
+                data = tmpCtx.getImageData(0,0,w,h).data;
+                } catch(e) {
+                console.warn('CORS issue con video:', e);
+                cancelAnimationFrame(rafId);
+                return;
+                }
+
+                // bins de 256 intensidades
+                const binsR = new Array(256).fill(0);
+                const binsG = new Array(256).fill(0);
+                const binsB = new Array(256).fill(0);
+
+                for(let i=0; i<data.length; i+=4){
+                binsR[data[i]]++;
+                binsG[data[i+1]]++;
+                binsB[data[i+2]]++;
+                }
+
+                const maxVal = Math.max(
+                Math.max(...binsR),
+                Math.max(...binsG),
+                Math.max(...binsB)
+                );
+
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+
+                function drawHist(bins, color){
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.globalAlpha = 0.6;
+                for(let x=0; x<256; x++){
+                    const val = bins[x] / maxVal * canvas.height;
+                    ctx.moveTo(x, canvas.height);
+                    ctx.lineTo(x, canvas.height - val);
+                }
+                ctx.stroke();
+                ctx.globalAlpha = 1;
+                }
+
+                drawHist(binsR, "red");
+                drawHist(binsG, "lime");
+                drawHist(binsB, "blue");
+
+                rafId = requestAnimationFrame(sampleFrame);
+            }
+
+            function start() {
+                if (!rafId) rafId = requestAnimationFrame(sampleFrame);
+            }
+            function stop() {
+                if (rafId) cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+
+            // play/pause listener
+            document.addEventListener('play', e => {
+                if (e.target.tagName==="VIDEO") start();
+            }, true);
+            document.addEventListener('pause', e => {
+                const anyPlaying = Array.from(document.querySelectorAll('video')).some(v=>!v.paused && v.readyState>=2);
+                if (!anyPlaying) stop();
+            }, true);
+
+            histToggle.addEventListener('click', ()=>{
+                histPanel.classList.toggle('minimized');
+            });
+
+            })();*/
         </script>
+        
 </body>
 </html>
