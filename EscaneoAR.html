@@ -108,7 +108,7 @@
 
                         <a-entity id="statsGroup" visible="false">
                             <a-plane id="statsBG" position="0 0 0" 
-                                     width="0.3" height="0.5" 
+                                     width="0.5" height="0.5" 
                                      color="#0f1a3a" opacity="0.7"
                                      material="shader: standard; side: double; rounded:true;">
                             </a-plane>
@@ -251,11 +251,11 @@
             if (pais && pais.stats) {
                 statsText.setAttribute("value", 
                     `${pais.pais}\n` + 
-                    `Partidos: ${pais.stats.partidos}\n` +
-                    `Victorias: ${pais.stats.victorias}\n` +
+                    `Partidos disputados: ${pais.stats.partidos}\n` +
+                    `Victorias obtenidas: ${pais.stats.victorias}\n` +
                     `Derrotas: ${pais.stats.derrotas}\n` +
                     `Empates: ${pais.stats.empates}\n` +
-                    `Goles: ${pais.stats.goles}`
+                    `Goles marcados: ${pais.stats.goles}`
                 );
                 statsText.setAttribute("color", "#FFD700");
                 statsText.setAttribute("width", 1);
