@@ -1,0 +1,11 @@
+Model Information:
+* title:	Iran Anim
+* source:	https://sketchfab.com/3d-models/iran-anim-abc073ad94c64d6e96168282695bbe20
+* author:	Javier Guijarro (https://sketchfab.com/sineadbolty)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Iran Anim" (https://sketchfab.com/3d-models/iran-anim-abc073ad94c64d6e96168282695bbe20) by Javier Guijarro (https://sketchfab.com/sineadbolty) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

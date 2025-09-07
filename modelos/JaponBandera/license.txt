@@ -1,0 +1,11 @@
+Model Information:
+* title:	Japan flag with animation
+* source:	https://sketchfab.com/3d-models/japan-flag-with-animation-ddbcc3044aed46a689e65d7ba2901758
+* author:	zeeshanfareed (https://sketchfab.com/zeeshanfareed)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Japan flag with animation" (https://sketchfab.com/3d-models/japan-flag-with-animation-ddbcc3044aed46a689e65d7ba2901758) by zeeshanfareed (https://sketchfab.com/zeeshanfareed) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

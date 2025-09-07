@@ -1,0 +1,11 @@
+Model Information:
+* title:	Argentina Anim
+* source:	https://sketchfab.com/3d-models/argentina-anim-be71be6021034836aa070e77556f4244
+* author:	Javier Guijarro (https://sketchfab.com/sineadbolty)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Argentina Anim" (https://sketchfab.com/3d-models/argentina-anim-be71be6021034836aa070e77556f4244) by Javier Guijarro (https://sketchfab.com/sineadbolty) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

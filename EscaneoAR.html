@@ -85,7 +85,7 @@
 
                     <a-assets>
                         <!-- Modelos -->
-                        <a-asset-item id="modeloTrofeo" src="./modelos/mexico_flag/mexico_flag.gltf"></a-asset-item>
+                        <a-asset-item id="modeloFlag" src="./modelos/mexico_flag/mexico_flag.gltf"></a-asset-item>
 
                         <!-- Videos -->
                         <video id="videoMX" src="./assets/videoMX.mp4" loop crossorigin="anonymous" webkit-playsinline playsinline muted></video>
@@ -98,7 +98,7 @@
                     <!--== TARGET: México (1) ==-->
                     <a-entity mindar-image-target="targetIndex: 0" id="targetMX">
                         <a-gltf-model 
-                            id="gltfMX" src="#modeloTrofeo"
+                            id="gltfMX" src="#modeloFlag"
                             position="0 -0.20 0.1" scale="0.0002 0.0002 0.0002" visible="false"
                             animation-mixer="clip: *; loop: repeat">
                         </a-gltf-model>

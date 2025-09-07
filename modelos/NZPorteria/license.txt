@@ -1,0 +1,11 @@
+Model Information:
+* title:	Football set
+* source:	https://sketchfab.com/3d-models/football-set-e9ecf5e168c0425181f4e917c43e75d3
+* author:	Mc1800p (https://sketchfab.com/Mc1800p)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Football set" (https://sketchfab.com/3d-models/football-set-e9ecf5e168c0425181f4e917c43e75d3) by Mc1800p (https://sketchfab.com/Mc1800p) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
